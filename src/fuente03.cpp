@@ -1,11 +1,11 @@
-#include <pthread>
 #include <sys/types.h>
-#include <signal.h>
+#include <unistd.h>
+#include <ProcesoPar.h>
 
 using namespace std;
 
 int enviarMensajeProcesoPar(ProcesoPar_t *procesoPar,
 			    const void *mensaje,
 			    unsigned int longitud) {
-  return 0;
+  return write(procesoPar->tuberia_in[0], mensaje, longitud);
 }

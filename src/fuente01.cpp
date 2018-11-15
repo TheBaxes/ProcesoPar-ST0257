@@ -32,8 +32,8 @@ ProcesoPar_t *lanzarProcesoPar(const char *nombreArchivoEjecutable,
     if (abrirHijo(procesoPar, nombreArchivoEjecutable,
 		  listaLineaComando, env, errorP) < 0) exit(EXIT_FAILURE);
   } else {
-    int result = procesarPadre(procesoPar, errorP);
-    if (result > 0) return nullptr;
+    if (procesarPadre(procesoPar, errorP) > 0)
+      return nullptr;
   }
   return procesoPar;
 }

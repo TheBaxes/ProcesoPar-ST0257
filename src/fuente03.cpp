@@ -7,5 +7,8 @@ using namespace std;
 int enviarMensajeProcesoPar(ProcesoPar_t *procesoPar,
 			    const void *mensaje,
 			    unsigned int longitud) {
-  return write(procesoPar->tuberia_in[0], mensaje, longitud);
+  sem_wait(&procesoPar->mutex);
+  int result = write(procesoPar->tuberia_in[1], mensaje, longitud) != longitud;
+  sem_post(&procesoPar->mutex);
+  return result;
 }

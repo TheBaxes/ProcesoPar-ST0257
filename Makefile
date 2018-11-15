@@ -1,4 +1,4 @@
-CXXFLAGS=-I./include -fPIC -Wall -Wextra -O2
+CXXFLAGS=-I./include -std=c++11 -fPIC -Wall -Wextra -pedantic 
 LDFLAGS=-pthread -shared
 
 VPATH = src

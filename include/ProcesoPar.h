@@ -1,20 +1,22 @@
 #pragma once
 #include <pthread.h>
 #include <unistd.h>
+#include <semaphore.h>
 
 enum Errors {};
 
 typedef struct ProcesoPar {
   pthread_t thread;
   pid_t hijo;
-  int tuberia_in[2];
-  int tuberia_out[2];
+  int *tuberia_in;
+  int *tuberia_out;
   int (*f)(const void*, unsigned int);
+  sem_t mutex;
 } ProcesoPar_t;
 
 ProcesoPar_t *lanzarProcesoPar(const char *nombreArchivoEjecutable,
-			       const char **listaLineaComando,
-			       const char **env);
+			       char *const *listaLineaComando,
+			       char *const *env);
 
 int destruirProcesoPar(ProcesoPar_t *procesoPar);
 
